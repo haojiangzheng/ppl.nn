@@ -26,8 +26,8 @@ using namespace ppl::common;
 
 namespace ppl { namespace nn { namespace riscv {
 
-RetCode RiscvDataConverter::Convert(BufferDesc* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                    const TensorShape& src_desc, const void*, const void*) const {
+RetCode RiscvDataConverter::Convert(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                    const ppl::common::TensorShape& src_desc, const void*, const void*) const {
     LOG(DEBUG) << "RISCV Data Converter from data format " << GetDataFormatStr(src_desc.GetDataFormat()) << " to "
                << GetDataFormatStr(dst_desc.GetDataFormat());
     LOG(DEBUG) << "RISCV Data Converter from data type " << GetDataTypeStr(src_desc.GetDataType()) << " to "
@@ -84,14 +84,14 @@ RetCode RiscvDataConverter::Convert(BufferDesc* dst, const TensorShape& dst_desc
     return RC_UNSUPPORTED;
 }
 
-RetCode RiscvDataConverter::ConvertToHost(void* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                          const TensorShape& src_desc, const void*) const {
+RetCode RiscvDataConverter::ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                          const ppl::common::TensorShape& src_desc, const void*) const {
     BufferDesc dst_wrapper(dst);
     return Convert(&dst_wrapper, dst_desc, src, src_desc);
 }
 
-RetCode RiscvDataConverter::ConvertFromHost(BufferDesc* dst, const TensorShape& dst_desc, const void* src,
-                                            const TensorShape& src_desc, const void*) const {
+RetCode RiscvDataConverter::ConvertFromHost(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const void* src,
+                                            const ppl::common::TensorShape& src_desc, const void*) const {
     return Convert(dst, dst_desc, BufferDesc(const_cast<void*>(src)), src_desc);
 }
 

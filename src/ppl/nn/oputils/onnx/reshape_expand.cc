@@ -27,7 +27,7 @@ RetCode ReshapeExpand(InputOutputInfo* info, const ir::Attr*, const int64_t* sha
     auto shape = info->GetInput<TensorImpl>(1);
     const uint32_t shape_dim_count = shape->GetShape()->IsScalar() ? 1 : shape->GetShape()->GetDim(0);
 
-    const TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
     auto out_shape0 = info->GetOutput<TensorImpl>(0)->GetShape();
 
     TensorShape expand_shape;

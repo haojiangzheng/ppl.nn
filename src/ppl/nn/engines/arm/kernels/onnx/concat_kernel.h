@@ -39,7 +39,7 @@ private:
 
 private:
     const ppl::nn::onnx::ConcatParam* param_ = nullptr;
-    std::vector<ppl::nn::TensorShape*> src_shape_list_;
+    std::vector<ppl::common::TensorShape*> src_shape_list_;
     std::vector<void*> src_list_;
 };
 

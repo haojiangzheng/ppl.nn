@@ -68,7 +68,7 @@ ResizeOp::ResizeOp(const ir::Node* node) : CudaOptKernel(node) {
         int64_t* sizes_data = nullptr;
 
         if (!info->GetInput<TensorImpl>(1)->GetShape()->IsEmpty()) {
-            const TensorShape& shape = *info->GetInput<TensorImpl>(1)->GetShape();
+            const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(1)->GetShape();
             roi_data = (float*)malloc(shape.CalcBytesIncludingPadding());
             if (info->GetInput<TensorImpl>(1)->GetBufferPtr<void>() == nullptr)
                 return RC_INVALID_VALUE;
@@ -79,7 +79,7 @@ ResizeOp::ResizeOp(const ir::Node* node) : CudaOptKernel(node) {
             }
         }
         if (!info->GetInput<TensorImpl>(2)->GetShape()->IsEmpty()) {
-            const TensorShape& shape = *info->GetInput<TensorImpl>(2)->GetShape();
+            const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(2)->GetShape();
             scales_data = (float*)malloc(shape.CalcBytesIncludingPadding());
             if (info->GetInput<TensorImpl>(2)->GetBufferPtr<void>() == nullptr) {
                 return RC_INVALID_VALUE;
@@ -92,7 +92,7 @@ ResizeOp::ResizeOp(const ir::Node* node) : CudaOptKernel(node) {
         }
         if (info->GetInputCount() == 4) {
             if (!info->GetInput<TensorImpl>(3)->GetShape()->IsEmpty()) {
-                const TensorShape& shape = *info->GetInput<TensorImpl>(3)->GetShape();
+                const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(3)->GetShape();
                 sizes_data = (int64_t*)malloc(shape.CalcBytesIncludingPadding());
                 if (info->GetInput<TensorImpl>(3)->GetBufferPtr<void>() == nullptr) {
                     return RC_INVALID_VALUE;

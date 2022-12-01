@@ -44,7 +44,7 @@ bool TuringIMMAImpgemm::IsSupported(const ir::Node* node, const OptKernelOptions
                                     dataformat_t input_format) const {
     uint32_t group = (reinterpret_cast<CudaConvParam*>(options.param))->param.group;
     // check if conv is depthwise
-    const TensorShape& tensor1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
+    const ppl::common::TensorShape& tensor1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
     if (group == tensor1.GetDim(0) && tensor1.GetDim(1) == 1 && group != 1) {
         return false;
     }
@@ -91,7 +91,7 @@ double TuringIMMAImpgemm::ExcuteTimer(const ir::Node* node, OptKernelOptions& op
     auto shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     auto shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
     auto shape_in2 = TensorShape();
-    const TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
     auto align_size = ppl::common::cuda::GetDataFormatChannelAlignment(shape_in0.GetDataFormat());
     conv_param_t temp_conv_param;
     fuse_param_t temp_fuse_param;
@@ -176,9 +176,9 @@ RetCode TuringIMMAImpgemm::ModifyParam(ir::Node* node, OptKernelOptions& options
     auto weight_node = topo->GetNode(weight_edge->GetProducer());
     auto quants = options.quants;
 
-    const TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
-    const TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
-    const TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
+    const ppl::common::TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
     auto align_size = ppl::common::cuda::GetDataFormatChannelAlignment(shape_in0.GetDataFormat());
 
     RetCode status;
@@ -249,8 +249,8 @@ RetCode TuringIMMAImpgemm::ModifyParam(ir::Node* node, OptKernelOptions& options
         options.info->constants.find(weight_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = weight_node->GetInput(0);
         auto postedge_id = node->GetInput(1);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto newshape = postshape;
         newshape.SetPadding1(0, k_per_grp_pad * temp_conv_param.num_grp - newshape.GetDim(0));
 
@@ -301,8 +301,8 @@ RetCode TuringIMMAImpgemm::ModifyParam(ir::Node* node, OptKernelOptions& options
         options.info->constants.find(bias_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = bias_node->GetInput(0);
         auto postedge_id = node->GetInput(2);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto newshape = postshape;
         newshape.SetDim(0, k_per_grp_pad * temp_conv_param.num_grp);
         RuntimeConstantInfo bias_constat_info;

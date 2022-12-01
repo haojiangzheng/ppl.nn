@@ -62,7 +62,7 @@ ppl::common::RetCode ConcatKernel::DoExecute(KernelExecContext* ctx) {
     const int64_t real_axis =
         param_->axis < 0 ? param_->axis + ctx->GetInput<TensorImpl>(0)->GetShape()->GetDimCount() : param_->axis;
 
-    return ppl::kernel::arm_server::neon::concat((const ppl::nn::TensorShape**)src_shape_list_.data(),
+    return ppl::kernel::arm_server::neon::concat((const ppl::common::TensorShape**)src_shape_list_.data(),
                                                  (const void**)src_list_.data(), ctx->GetInputCount(), real_axis,
                                                  concat_result->GetBufferPtr<void>());
 }

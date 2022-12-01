@@ -73,9 +73,9 @@ ppl::common::RetCode ConvImmaKernel::DoExecute(KernelExecContext* ctx) {
     auto input = ctx->GetInput<TensorImpl>(0);
     auto weight = ctx->GetInput<TensorImpl>(1);
     auto output = ctx->GetOutput<TensorImpl>(0);
-    const TensorShape& shape_in0 = *input->GetShape();
-    const TensorShape& shape_in1 = *weight->GetShape();
-    const TensorShape& shape_out = *output->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *input->GetShape();
+    const ppl::common::TensorShape& shape_in1 = *weight->GetShape();
+    const ppl::common::TensorShape& shape_out = *output->GetShape();
 
     auto input_quant = GetCommonParam()->cuda_tensor_info->at(input->GetEdge()->GetId());
     auto weight_quant = GetCommonParam()->cuda_tensor_info->at(weight->GetEdge()->GetId());

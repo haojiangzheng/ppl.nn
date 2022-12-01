@@ -25,7 +25,7 @@ ppl::common::RetCode SliceKernel::DoExecute(KernelExecContext* ctx) {
     auto output = ctx->GetOutput<TensorImpl>(0);
     SliceKernelParam kernel_param;
 
-    const TensorShape& in_shape0 = *ctx->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape0 = *ctx->GetInput<TensorImpl>(0)->GetShape();
     int dim_count = in_shape0.GetDimCount();
     int input_count = ctx->GetInputCount();
 

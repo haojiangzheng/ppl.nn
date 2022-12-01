@@ -22,7 +22,7 @@
 namespace ppl { namespace nn { namespace cuda {
 
 uint64_t TopKKernel::CalcTmpBufferSize(const KernelExecContext& ctx) const {
-    const TensorShape& indices_shape = *ctx.GetOutput<TensorImpl>(1)->GetShape();
+    const ppl::common::TensorShape& indices_shape = *ctx.GetOutput<TensorImpl>(1)->GetShape();
     int64_t k_value;
     auto status = ctx.GetInput<TensorImpl>(1)->CopyToHost(&k_value);
     if (status != ppl::common::RC_SUCCESS) {

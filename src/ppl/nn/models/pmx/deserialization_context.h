@@ -18,7 +18,7 @@
 #ifndef _ST_HPC_PPL_NN_MODELS_PMX_DESERIALIZATION_CONTEXT_H_
 #define _ST_HPC_PPL_NN_MODELS_PMX_DESERIALIZATION_CONTEXT_H_
 
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include "ppl/nn/common/buffer_info.h"
 #include <map>
 

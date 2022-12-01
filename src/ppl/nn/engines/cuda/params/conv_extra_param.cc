@@ -54,8 +54,8 @@ int GetRelueType(const std::string& name) {
 
 #define Align(x, y) (((x) + (y)-1) / (y) * (y))
 
-RetCode ConvertToForwardConvParam(const TensorShape& shape_in0, const TensorShape& shape_in1,
-                                  const TensorShape& shape_out, const CudaConvParam& cuda_param,
+RetCode ConvertToForwardConvParam(const ppl::common::TensorShape& shape_in0, const ppl::common::TensorShape& shape_in1,
+                                  const ppl::common::TensorShape& shape_out, const CudaConvParam& cuda_param,
                                   conv_param_t& conv_param) {
     const ConvParam& normal_param = cuda_param.param;
 
@@ -93,7 +93,7 @@ RetCode ConvertToForwardConvParam(const TensorShape& shape_in0, const TensorShap
 RetCode ConvertToPrelu(uint32_t fuse_index, InputOutputInfo* info, CudaDevice* device, ConvFusionInfo fuse_info,
                        fuse_param_t& fuse_param) {
     uint32_t prelu_input = fuse_info.input_inds[fuse_index];
-    const TensorShape& shape = *info->GetInput<TensorImpl>(prelu_input)->GetShape();
+    const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(prelu_input)->GetShape();
 
     if (fuse_index == 0) {
         fuse_param.has_prelu = shape.IsScalar() ? 1 : 2;

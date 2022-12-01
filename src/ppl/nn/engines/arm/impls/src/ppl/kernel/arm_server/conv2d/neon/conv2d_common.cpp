@@ -125,7 +125,7 @@ conv2d_offline_manager * conv2d_algo::generate_conv_mgr(
 }
 
 conv2d_offline_manager *conv2d_algo_selector::fast_gen_algo(
-    const ppl::nn::TensorShape &shape,
+    const ppl::common::TensorShape &shape,
     const ppl::nn::arm::EngineOptions &options,
     const ppl::common::isa_t isa_flags,
     const conv2d_param &param,
@@ -384,7 +384,7 @@ conv2d_offline_manager *conv2d_algo_selector::fast_gen_algo(
 }
 
 conv2d_offline_manager *conv2d_algo_selector::gen_fast_algo(
-    const ppl::nn::TensorShape &src_shape,
+    const ppl::common::TensorShape &src_shape,
     const ppl::nn::arm::EngineOptions &options,
     const ppl::common::isa_t isa_flags,
     const conv2d_param &param,
@@ -537,7 +537,7 @@ conv2d_offline_manager *conv2d_algo_selector::gen_fast_algo(
     const uint32_t pad_num_outs = ((param.num_output + (num_lanes - 1)) / num_lanes) * num_lanes;
 
     const int64_t num_batch = src_shape.GetDim(0);
-    ppl::nn::TensorShape dst_shape;
+    ppl::common::TensorShape dst_shape;
     dst_shape.Reshape({num_batch, pad_num_outs, dst_h, dst_w});
 
     const size_t src_size  = num_batch * pad_channels * src_h * src_w * elem_size;

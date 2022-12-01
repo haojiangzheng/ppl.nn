@@ -56,7 +56,7 @@ public:
     /** @brief frees the internal buffer */
     void FreeBuffer();
 
-    ppl::common::RetCode ReallocBuffer(const TensorShape&);
+    ppl::common::RetCode ReallocBuffer(const ppl::common::TensorShape&);
 
     template <typename T = void>
     T* GetBufferPtr() const {

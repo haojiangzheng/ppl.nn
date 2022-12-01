@@ -60,7 +60,7 @@ PadOp::PadOp(const ir::Node* node) : CudaOptKernel(node) {
     };
 
     infer_dims_func_ = [this](InputOutputInfo* info) -> RetCode {
-        const TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
+        const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
         uint32_t dim_count = shape.GetDimCount();
 
         if (info->GetInputCount() == 1) {

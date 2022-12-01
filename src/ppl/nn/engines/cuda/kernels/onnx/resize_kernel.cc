@@ -58,7 +58,7 @@ ppl::common::RetCode ResizeKernel::DoExecute(KernelExecContext* ctx) {
     std::vector<float> scales_data;
     if (!ctx->GetInput<TensorImpl>(2)->GetShape()->IsEmpty()) {
         scale_pre_set = true;
-        const TensorShape& shape = *ctx->GetInput<TensorImpl>(2)->GetShape();
+        const ppl::common::TensorShape& shape = *ctx->GetInput<TensorImpl>(2)->GetShape();
         scales_data.resize(shape.CalcElementsIncludingPadding());
         auto status = ctx->GetInput<TensorImpl>(2)->CopyToHost(scales_data.data());
         if (status != ppl::common::RC_SUCCESS) {

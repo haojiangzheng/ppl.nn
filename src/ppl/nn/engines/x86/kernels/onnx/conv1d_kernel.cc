@@ -57,15 +57,15 @@ ppl::common::RetCode Conv1dKernel::DoExecute(KernelExecContext* ctx) {
     PPLNN_X86_DEBUG_TRACE("fuse_flag: %ld\n", cur_executor->conv_param()->fuse_flag);
     PPLNN_X86_DEBUG_TRACE("isa: %u\n", GetISA());
 
-    TensorShape X_shape = *X->GetShape();
-    TensorShape Y_shape = *Y->GetShape();
+    ppl::common::TensorShape X_shape = *X->GetShape();
+    ppl::common::TensorShape Y_shape = *Y->GetShape();
     X_shape.Reshape({X_shape.GetDim(0), X_shape.GetDim(1), 1, X_shape.GetDim(2)});
     Y_shape.Reshape({Y_shape.GetDim(0), Y_shape.GetDim(1), 1, Y_shape.GetDim(2)});
     cur_executor->set_src_shape(&X_shape);
     cur_executor->set_dst_shape(&Y_shape);
 
     TensorImpl* sum_src = nullptr;
-    TensorShape sum_shape;
+    ppl::common::TensorShape sum_shape;
     if (cur_executor->conv_param()->fuse_flag & ppl::kernel::x86::conv_fuse_flag::SUM) {
         sum_src = ctx->GetInput<TensorImpl>(ctx->GetInputCount() - 1);
         PPLNN_X86_DEBUG_TRACE("Input [sum_src]:\n");

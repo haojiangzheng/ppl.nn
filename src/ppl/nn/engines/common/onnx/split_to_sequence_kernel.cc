@@ -118,7 +118,7 @@ static RetCode GetSplitChunks(const TensorImpl* split, uint32_t orig_axis_dim, v
     return RC_SUCCESS;
 }
 
-static RetCode InitNdarrayBufferInfo(const TensorShape& inshape, const BufferDesc& inbuf, Device* device,
+static RetCode InitNdarrayBufferInfo(const ppl::common::TensorShape& inshape, const BufferDesc& inbuf, Device* device,
                                      TensorBufferInfo* info) {
     info->SetDevice(device);
     info->Reshape(inshape);
@@ -163,7 +163,7 @@ RetCode SplitToSequenceKernel::DoExecute(KernelExecContext* ctx) {
     }
 
     const BufferDesc* src_buffer = &input->GetBufferDesc();
-    const TensorShape* src_shape = input->GetShape();
+    const ppl::common::TensorShape* src_shape = input->GetShape();
     TensorBufferInfo ndarray_buffer_info;
     if (input->GetShape()->GetDataFormat() != DATAFORMAT_NDARRAY) {
         status = InitNdarrayBufferInfo(*input->GetShape(), input->GetBufferDesc(), device, &ndarray_buffer_info);
@@ -221,7 +221,7 @@ RetCode SplitToSequenceKernel::DoExecute(KernelExecContext* ctx) {
         }
 
         if (!split && keepdims_ == 0) {
-            const TensorShape* orig_shape = buffer_info.GetShape();
+            const ppl::common::TensorShape* orig_shape = buffer_info.GetShape();
             vector<int64_t> new_dims;
             new_dims.reserve(orig_shape->GetDimCount());
             for (uint32_t i = 0; i < orig_shape->GetDimCount(); ++i) {

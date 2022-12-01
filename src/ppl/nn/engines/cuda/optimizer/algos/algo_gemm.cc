@@ -44,7 +44,7 @@ void GemmAlgorithm::GetAttrParam(void*& param) const {
 
 bool GemmAlgorithm::IsSupported(const ir::Node* node, const OptKernelOptions& options,
                                 dataformat_t input_format) const {
-    const TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     if (tensor0.GetDataType() != DATATYPE_FLOAT16 && tensor0.GetDataType() != DATATYPE_INT8) {
         return false;
     }
@@ -203,8 +203,8 @@ RetCode GemmAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& options) {
     auto weight_edge = topo->GetEdge(node->GetInput(1));
     auto weight_node = topo->GetNode(weight_edge->GetProducer());
 
-    const TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
-    const TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
     auto align_size = ppl::common::cuda::GetDataFormatChannelAlignment(shape_in0.GetDataFormat());
 
     // Add quant to conv inputs
@@ -268,7 +268,7 @@ RetCode GemmAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& options) {
         options.info->constants.find(weight_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = weight_node->GetInput(0);
         auto postedge_id = node->GetInput(1);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
         auto postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto newshape = postshape;
 
@@ -349,8 +349,8 @@ RetCode GemmAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& options) {
         options.info->constants.find(bias_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = bias_node->GetInput(0);
         auto postedge_id = node->GetInput(2);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto newshape = postshape;
 
         newshape.SetDim(0, (postshape.GetDim(0) + align_size - 1) / align_size * align_size);

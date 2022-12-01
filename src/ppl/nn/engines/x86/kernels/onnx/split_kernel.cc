@@ -28,7 +28,7 @@ ppl::common::RetCode SplitKernel::DoExecute(KernelExecContext* ctx) {
     PPLNN_X86_REQUIRED_INPUT(input, 0);
 
     std::vector<void*> dst_list(ctx->GetOutputCount());
-    std::vector<const TensorShape*> dst_shape_list(ctx->GetOutputCount());
+    std::vector<const ppl::common::TensorShape*> dst_shape_list(ctx->GetOutputCount());
 
     PPLNN_X86_DEBUG_TRACE("Op: %s\n", GetName().c_str());
     PPLNN_X86_DEBUG_TRACE("Input [input]:\n");

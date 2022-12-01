@@ -30,7 +30,7 @@ static inline float sigmoidf(const float x)
 }
 
 uint64_t gru_fp32_get_buffer_bytes(
-    const ppl::nn::TensorShape *X_shape,
+    const ppl::common::TensorShape *X_shape,
     const rnn_direction_t direction,
     const int64_t hidden_size,
     const bool has_Y,
@@ -47,7 +47,7 @@ uint64_t gru_fp32_get_buffer_bytes(
 }
 
 ppl::common::RetCode gru_fp32_ref(
-    const ppl::nn::TensorShape *X_shape,
+    const ppl::common::TensorShape *X_shape,
     const float *X,
     const float **W_weight,
     const float **Rzr_weight,
@@ -206,7 +206,7 @@ ppl::common::RetCode gru_fp32_ref(
 
 ppl::common::RetCode gru_fp32(
     const ppl::common::isa_t isa,
-    const ppl::nn::TensorShape *X_shape,
+    const ppl::common::TensorShape *X_shape,
     const float *X,
     const float **W_weight,
     const float **Rzr_weight,

@@ -74,7 +74,7 @@ ppl::common::RetCode ConcatKernel::DoExecute(KernelExecContext* ctx) {
     for (uint32_t i = 0; i < ctx->GetInputCount(); ++i) {
         auto input = ctx->GetInput<TensorImpl>(i);
         src_list[i] = input->GetBufferPtr();
-        const TensorShape& shape = *input->GetShape();
+        const ppl::common::TensorShape& shape = *input->GetShape();
         for (int32_t it = 0; it < dim_count; ++it) {
             src_dims[i].push_back(shape.GetDim(it));
             src_padded_dims[i].push_back(shape.GetDim(it) + shape.GetPadding0(it) + shape.GetPadding1(it));

@@ -30,7 +30,7 @@ namespace ppl { namespace nn { namespace cuda {
 
 bool DeformConvAlgorithm::IsSupported(const ir::Node* node, const OptKernelOptions& options,
                                       dataformat_t input_format) const {
-    const TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     if (tensor0.GetDataType() != ppl::common::DATATYPE_FLOAT16) {
         return false;
     }
@@ -43,7 +43,7 @@ bool DeformConvAlgorithm::IsSupported(const ir::Node* node, const OptKernelOptio
 
 double DeformConvAlgorithm::ExcuteTimer(const ir::Node* node, OptKernelOptions& options) {
     options.compile_set->emplace(node->GetId());
-    const TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
     if (shape_out.GetDataFormat() == DATAFORMAT_NHWC8)
         return 1e-5;
     else
@@ -66,8 +66,8 @@ RetCode DeformConvAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& optio
         options.info->constants.find(weight_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = weight_node->GetInput(0);
         auto postedge_id = node->GetInput(3);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto size = postshape.CalcElementsIncludingPadding();
         size = (size / postshape.GetDim(0) + 7) / 8 * 8 * postshape.GetDim(0);
 

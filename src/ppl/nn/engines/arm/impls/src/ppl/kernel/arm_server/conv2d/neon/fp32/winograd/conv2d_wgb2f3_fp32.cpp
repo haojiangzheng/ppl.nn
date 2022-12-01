@@ -934,10 +934,10 @@ ppl::common::RetCode conv2d_wgb2f3_fp32_offline_manager::fast_init_schedule_para
 }
 
 ppl::common::RetCode conv2d_wgb2f3_fp32_offline_manager::pick_best_schedule_param(
-    const ppl::nn::TensorShape &src_shape,
+    const ppl::common::TensorShape &src_shape,
     void *src,
     void *cvt_bias,
-    const ppl::nn::TensorShape &dst_shape,
+    const ppl::common::TensorShape &dst_shape,
     void *dst,
     bool tune_sp,
     double &run_time)
@@ -1071,7 +1071,7 @@ ppl::common::RetCode conv2d_wgb2f3_fp32_offline_manager::generate_cvt_weights(
     if (new_bias && new_bias->IsBufferOwner() && new_bias->GetBufferPtr()) {
         cvt_bias_ = new_bias->GetBufferPtr<float>();
     } else if (bias && new_bias) {
-        ppl::nn::TensorShape bias_shape;
+        ppl::common::TensorShape bias_shape;
         bias_shape.SetDimCount(1);
         bias_shape.SetDim(0, cvt_bias_size_/sizeof(float));
         bias_shape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);
@@ -1092,7 +1092,7 @@ ppl::common::RetCode conv2d_wgb2f3_fp32_offline_manager::generate_cvt_weights(
 
     cvt_filter_size_ = conv2d_n4cx_wgb2f3_get_converted_filter_size_fp32(
         channels, num_output, param_.group);
-    ppl::nn::TensorShape filter_shape;
+    ppl::common::TensorShape filter_shape;
     filter_shape.SetDimCount(1);
     filter_shape.SetDim(0, cvt_filter_size_/sizeof(float));
     filter_shape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);
