@@ -42,9 +42,9 @@ ppl::common::RetCode MMCVModulatedDeformConv2dKernel::DoExecute(KernelExecContex
     auto weight = ctx->GetInput<TensorImpl>(3);
     auto bias = ctx->GetInputCount() > 4 ? ctx->GetInput<TensorImpl>(4) : nullptr;
 
-    const TensorShape* shape_in0 = ctx->GetInput<TensorImpl>(0)->GetShape();
-    const TensorShape* shape_in3 = ctx->GetInput<TensorImpl>(3)->GetShape();
-    const TensorShape* shape_out = ctx->GetOutput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape* shape_in0 = ctx->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape* shape_in3 = ctx->GetInput<TensorImpl>(3)->GetShape();
+    const ppl::common::TensorShape* shape_out = ctx->GetOutput<TensorImpl>(0)->GetShape();
 
     int64_t size = PPLCUDADeformConvGetBufSize(shape_in0, shape_in3, shape_out);
     BufferDesc tmp_buffer_desc;

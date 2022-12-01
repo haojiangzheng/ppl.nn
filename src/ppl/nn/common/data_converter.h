@@ -19,7 +19,7 @@
 #define _ST_HPC_PPL_NN_COMMON_DATA_CONVERTER_H_
 
 #include "ppl/common/retcode.h"
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include "ppl/nn/common/buffer_desc.h"
 
 namespace ppl { namespace nn {
@@ -35,8 +35,8 @@ public:
        @param src points to data area of a device
        @param src_desc shape of `src`
     */
-    virtual ppl::common::RetCode ConvertToHost(void* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                               const TensorShape& src_desc,
+    virtual ppl::common::RetCode ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                               const ppl::common::TensorShape& src_desc,
                                                const void* src_custom_info = nullptr) const = 0;
 
     /**
@@ -46,8 +46,8 @@ public:
        @param src points to cpu memory
        @param src_desc shape of `src`
     */
-    virtual ppl::common::RetCode ConvertFromHost(BufferDesc* dst, const TensorShape& dst_desc, const void* src,
-                                                 const TensorShape& src_desc,
+    virtual ppl::common::RetCode ConvertFromHost(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const void* src,
+                                                 const ppl::common::TensorShape& src_desc,
                                                  const void* dst_custom_info = nullptr) const = 0;
 
     /**
@@ -57,8 +57,8 @@ public:
        @param src pointer to data area of a device
        @param src_desc shape of `src`
     */
-    virtual ppl::common::RetCode Convert(BufferDesc* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                         const TensorShape& src_desc, const void* dst_custom_info = nullptr,
+    virtual ppl::common::RetCode Convert(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                         const ppl::common::TensorShape& src_desc, const void* dst_custom_info = nullptr,
                                          const void* src_custom_info = nullptr) const = 0;
 };
 

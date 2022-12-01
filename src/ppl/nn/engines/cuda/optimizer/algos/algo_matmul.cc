@@ -45,7 +45,7 @@ void MatMulAlgorithm::GetAttrParam(void*& param) const {
 bool MatMulAlgorithm::IsSupported(const ir::Node* node, const OptKernelOptions& options,
                                   dataformat_t input_format) const {
     // check if matmul is fp32 type
-    const TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     if (tensor0.GetDataType() != ppl::common::DATATYPE_FLOAT16) {
         return false;
     }

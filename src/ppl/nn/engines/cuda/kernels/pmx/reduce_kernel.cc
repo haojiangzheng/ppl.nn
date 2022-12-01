@@ -50,7 +50,7 @@ ppl::common::RetCode ReduceKernel::DoExecute(KernelExecContext* ctx) {
     auto input = ctx->GetInput<TensorImpl>(0);
     auto output = ctx->GetOutput<TensorImpl>(0);
     ReduceParam param;
-    const TensorShape& input_shape = *input->GetShape();
+    const ppl::common::TensorShape& input_shape = *input->GetShape();
     uint32_t n_outer = 1, n_reduce = 1, n_inner = 1;
 
     switch (param_->type)

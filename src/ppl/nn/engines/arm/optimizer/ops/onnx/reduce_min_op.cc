@@ -50,7 +50,7 @@ RetCode ReduceMinOp::Init(const OptKernelOptions& options) {
 RetCode ReduceMinOp::SelectFormat(const InputOutputInfo& info,
                                   std::vector<ppl::common::dataformat_t>* selected_input_formats,
                                   std::vector<ppl::common::dataformat_t>* selected_output_formats) {
-    const TensorShape& input_shape = *info.GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& input_shape = *info.GetInput<TensorImpl>(0)->GetShape();
     ppl::common::dataformat_t selected_data_format = ppl::common::DATAFORMAT_NDARRAY;
     const int64_t dim_count = input_shape.GetDimCount();
 

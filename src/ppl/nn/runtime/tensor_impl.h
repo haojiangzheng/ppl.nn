@@ -113,7 +113,7 @@ public:
         return buffer_info_.GetBufferDesc();
     }
 
-    TensorShape* GetShape() const override {
+    ppl::common::TensorShape* GetShape() const override {
         return buffer_info_.GetShape();
     }
 
@@ -135,8 +135,8 @@ public:
     ppl::common::RetCode CopyToHost(void* dst) const override;
     ppl::common::RetCode CopyFromHost(const void* src) override;
 
-    ppl::common::RetCode ConvertToHost(void* dst, const TensorShape& dst_desc) const override;
-    ppl::common::RetCode ConvertFromHost(const void* src, const TensorShape& src_desc) override;
+    ppl::common::RetCode ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc) const override;
+    ppl::common::RetCode ConvertFromHost(const void* src, const ppl::common::TensorShape& src_desc) override;
 
 private:
     tensortype_t type_;

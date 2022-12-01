@@ -49,7 +49,7 @@ bool X86Kernel::CanDoExecute(const KernelExecContext& ctx) const {
 }
 
 RetCode X86Kernel::DumpOutputTensors(KernelExecContext* ctx) {
-    auto get_dim_str = [](const TensorShape* shape) {
+    auto get_dim_str = [](const ppl::common::TensorShape* shape) {
         if (shape->IsScalar()) {
             return std::string("scalar");
         }
@@ -66,7 +66,7 @@ RetCode X86Kernel::DumpOutputTensors(KernelExecContext* ctx) {
         return res;
     };
 
-    auto get_dt_str = [](const TensorShape* shape) {
+    auto get_dt_str = [](const ppl::common::TensorShape* shape) {
         std::string res = GetDataTypeStr(shape->GetDataType());
         std::transform(res.begin(), res.end(), res.begin(),
             [](const char c) { return std::tolower(c); });

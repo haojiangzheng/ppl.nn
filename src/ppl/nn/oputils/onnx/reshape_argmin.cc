@@ -23,7 +23,7 @@ namespace ppl { namespace nn { namespace onnx {
 
 RetCode ReshapeArgMin(InputOutputInfo* info, const ir::Attr* arg) {
     auto param = static_cast<const ArgMinParam*>(arg);
-    const TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
     const uint32_t out_dim_count = in_shape0.GetDimCount();
     std::vector<int64_t> out_dims(out_dim_count);
     for (uint32_t i = 0; i < out_dim_count; ++i) {

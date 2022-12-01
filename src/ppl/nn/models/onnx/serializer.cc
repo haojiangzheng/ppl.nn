@@ -20,7 +20,7 @@
 #include "ppl/nn/models/onnx/utils.h"
 #include "ppl/nn/models/onnx/param_parser_manager.h"
 #include "ppl/nn/common/logger.h"
-#include "ppl/nn/common/tensor_shape.h" // INVALID_DIM_VALUE
+#include "ppl/common/tensor_shape.h" // INVALID_DIM_VALUE
 using namespace std;
 using namespace ppl::common;
 

@@ -28,7 +28,7 @@ template <typename Tpad>
 RetCode ReshapePad(InputOutputInfo* info, const ir::Attr* arg, const Tpad* start_pads, const Tpad* end_pads) {
     auto param = static_cast<const PadParam*>(arg);
 
-    const TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
     uint32_t dim_count = shape.GetDimCount();
     std::vector<int64_t> output_dim(dim_count, 0);
 
@@ -55,7 +55,7 @@ RetCode ReshapePad(InputOutputInfo* info, const ir::Attr* arg, const Tpad* start
 }
 
 RetCode ReshapePad(InputOutputInfo* info, const ir::Attr* arg) {
-    const TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
     uint32_t dim_count = shape.GetDimCount();
 
     auto pad = info->GetInput<TensorImpl>(1);

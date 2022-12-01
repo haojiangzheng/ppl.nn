@@ -93,9 +93,9 @@ protected:
     void *cvt_bias_;
 
     void *src_;
-    const ppl::nn::TensorShape *src_shape_;
+    const ppl::common::TensorShape *src_shape_;
     void *dst_;
-    const ppl::nn::TensorShape *dst_shape_;
+    const ppl::common::TensorShape *dst_shape_;
 
     void *temp_buffer_;
 
@@ -171,11 +171,11 @@ public:
         return src_;
     }
 
-    void set_src_shape(const ppl::nn::TensorShape *src_shape)
+    void set_src_shape(const ppl::common::TensorShape *src_shape)
     {
         src_shape_ = src_shape;
     }
-    const ppl::nn::TensorShape *src_shape() const
+    const ppl::common::TensorShape *src_shape() const
     {
         return src_shape_;
     };
@@ -189,11 +189,11 @@ public:
         return dst_;
     }
 
-    void set_dst_shape(const ppl::nn::TensorShape *dst_shape)
+    void set_dst_shape(const ppl::common::TensorShape *dst_shape)
     {
         dst_shape_ = dst_shape;
     }
-    const ppl::nn::TensorShape *dst_shape() const
+    const ppl::common::TensorShape *dst_shape() const
     {
         return dst_shape_;
     }
@@ -323,7 +323,7 @@ public:
             if (new_bias && new_bias->IsBufferOwner() && new_bias->GetBufferPtr()) {
                 cvt_bias_ = new_bias->GetBufferPtr<float>();
             } else if (bias && new_bias) {
-                ppl::nn::TensorShape bias_shape;
+                ppl::common::TensorShape bias_shape;
                 bias_shape.SetDimCount(1);
                 bias_shape.SetDim(0, cvt_bias_size_/sizeof(float));
                 bias_shape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);
@@ -344,7 +344,7 @@ public:
             
             cvt_filter_size_ = ppl_arm_server_kernel_fp32_fc_get_converted_filter_size(channels, num_output);
             if (!new_filter->IsBufferOwner() || !new_filter->GetBufferPtr()) {
-                ppl::nn::TensorShape filter_shape;
+                ppl::common::TensorShape filter_shape;
                 filter_shape.SetDimCount(1);
                 filter_shape.SetDim(0, cvt_filter_size_/sizeof(float));
                 filter_shape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);
@@ -366,7 +366,7 @@ public:
             if (new_bias && new_bias->IsBufferOwner() && new_bias->GetBufferPtr()) {
                 cvt_bias_ = new_bias->GetBufferPtr<__fp16>();
             } else if (bias && new_bias) {
-                ppl::nn::TensorShape bias_shape;
+                ppl::common::TensorShape bias_shape;
                 bias_shape.SetDimCount(1);
                 bias_shape.SetDim(0, cvt_bias_size_/sizeof(__fp16));
                 bias_shape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);
@@ -387,7 +387,7 @@ public:
             
             cvt_filter_size_ = ppl_arm_server_kernel_fp16_fc_get_converted_filter_size(channels, num_output);
             if (!new_filter->IsBufferOwner() || !new_filter->GetBufferPtr()) {
-                ppl::nn::TensorShape filter_shape;
+                ppl::common::TensorShape filter_shape;
                 filter_shape.SetDimCount(1);
                 filter_shape.SetDim(0, cvt_filter_size_/sizeof(__fp16));
                 filter_shape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);

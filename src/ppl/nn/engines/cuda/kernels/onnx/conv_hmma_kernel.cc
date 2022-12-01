@@ -69,9 +69,9 @@ ppl::common::RetCode ConvHmmaKernel::DoExecute(KernelExecContext* ctx) {
     conv_param_t temp_conv_param;
     fuse_param_t temp_fuse_param;
 
-    const TensorShape& shape_in0 = *ctx->GetInput<TensorImpl>(0)->GetShape();
-    const TensorShape& shape_in1 = *ctx->GetInput<TensorImpl>(1)->GetShape();
-    const TensorShape& shape_out = *ctx->GetOutput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *ctx->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& shape_in1 = *ctx->GetInput<TensorImpl>(1)->GetShape();
+    const ppl::common::TensorShape& shape_out = *ctx->GetOutput<TensorImpl>(0)->GetShape();
 
     ConvertToForwardConvParam(shape_in0, shape_in1, shape_out, *param_, temp_conv_param);
     ConvertToForwardFuseParam(ctx, GetCudaDevice(), param_->extra_param.fuse_info, temp_fuse_param);

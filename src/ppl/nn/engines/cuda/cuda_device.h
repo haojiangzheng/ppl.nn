@@ -36,7 +36,7 @@ public:
     ppl::common::RetCode Init(int device_id);
 
     using Device::Realloc;
-    ppl::common::RetCode Realloc(const TensorShape& shape, BufferDesc* buffer) override final {
+    ppl::common::RetCode Realloc(const ppl::common::TensorShape& shape, BufferDesc* buffer) override final {
         return Realloc(shape.CalcBytesIncludingPadding(), buffer);
     }
 
@@ -56,13 +56,13 @@ public:
     }
 
     ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, uint64_t bytes) const override final;
-    ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, const TensorShape&) const override final;
+    ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, const ppl::common::TensorShape&) const override final;
 
     ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, uint64_t bytes) const override final;
-    ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, const TensorShape&) const override final;
+    ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, const ppl::common::TensorShape&) const override final;
 
     ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, uint64_t bytes) const override final;
-    ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, const TensorShape&) const override final;
+    ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, const ppl::common::TensorShape&) const override final;
 
     ppl::common::RetCode Sync() override final;
 
