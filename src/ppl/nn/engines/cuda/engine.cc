@@ -193,7 +193,7 @@ RetCode CudaEngine::LoadConstants(const ConstantVisitor& visitor, map<edgeid_t, 
 
     uint64_t offset = 0;
     status = visitor.ForEach([this, eid2info, &block, &offset](const ir::Edge* edge, const void* data, uint64_t size,
-                                                               const TensorShape& shape) -> RetCode {
+                                                               const ppl::common::TensorShape& shape) -> RetCode {
         auto dev = &device_;
 
         BufferDesc buf;

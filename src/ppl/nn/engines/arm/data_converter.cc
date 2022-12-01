@@ -26,8 +26,8 @@ using namespace ppl::kernel::arm_server;
 
 namespace ppl { namespace nn { namespace arm {
 
-ppl::common::RetCode ArmDataConverter::Convert(BufferDesc* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                               const TensorShape& src_desc, const void*, const void*) const {
+ppl::common::RetCode ArmDataConverter::Convert(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                               const ppl::common::TensorShape& src_desc, const void*, const void*) const {
     LOG(DEBUG) << "ARM Data Converter from data format " << src_desc.GetDataFormat() << " to "
                << dst_desc.GetDataFormat();
     LOG(DEBUG) << "ARM Data Converter from data type " << src_desc.GetDataType() << " to " << dst_desc.GetDataType();
@@ -89,14 +89,14 @@ ppl::common::RetCode ArmDataConverter::Convert(BufferDesc* dst, const TensorShap
     return RC_UNSUPPORTED;
 }
 
-ppl::common::RetCode ArmDataConverter::ConvertToHost(void* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                                     const TensorShape& src_desc, const void*) const {
+ppl::common::RetCode ArmDataConverter::ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                                     const ppl::common::TensorShape& src_desc, const void*) const {
     BufferDesc dst_wrapper(dst);
     return Convert(&dst_wrapper, dst_desc, src, src_desc);
 }
 
-ppl::common::RetCode ArmDataConverter::ConvertFromHost(BufferDesc* dst, const TensorShape& dst_desc, const void* src,
-                                                       const TensorShape& src_desc, const void*) const {
+ppl::common::RetCode ArmDataConverter::ConvertFromHost(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const void* src,
+                                                       const ppl::common::TensorShape& src_desc, const void*) const {
     return Convert(dst, dst_desc, BufferDesc(const_cast<void*>(src)), src_desc);
 }
 

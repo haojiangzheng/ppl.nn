@@ -44,8 +44,8 @@ bool DepthwiseDirect::IsSupported(const ir::Node* node, const OptKernelOptions& 
                                   dataformat_t input_format) const {
     uint32_t group = (reinterpret_cast<CudaConvParam*>(options.param))->param.group;
     // check if conv is depthwise
-    const TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
-    const TensorShape& tensor1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
+    const ppl::common::TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& tensor1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
     if (group != tensor1.GetDim(0) || tensor1.GetDim(1) != 1 || group == 1) {
         return false;
     }
@@ -81,7 +81,7 @@ double DepthwiseDirect::ExcuteTimer(const ir::Node* node, OptKernelOptions& opti
     auto shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     auto shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
     auto shape_in2 = TensorShape();
-    const TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
     auto align_size = ppl::common::cuda::GetDataFormatChannelAlignment(shape_in0.GetDataFormat());
     ConvertToForwardConvParam(shape_in0, shape_in1, shape_out, attr_param_, temp_conv_param);
 
@@ -147,7 +147,7 @@ double DepthwiseDirect::ExcuteTimer(const ir::Node* node, OptKernelOptions& opti
 RetCode DepthwiseDirect::ModifyParam(ir::Node* node, OptKernelOptions& options) {
     this->attr_param_ = *(reinterpret_cast<CudaConvParam*>(options.param));
 
-    const TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     auto align_size = ppl::common::cuda::GetDataFormatChannelAlignment(shape_in0.GetDataFormat());
 
     auto topo = options.graph->topo.get();
@@ -160,8 +160,8 @@ RetCode DepthwiseDirect::ModifyParam(ir::Node* node, OptKernelOptions& options) 
     auto weight_iter = data->constants.find(preedge_id);
     if (weight_iter != data->constants.end() && // is a constant tensor and has not be loaded
         options.info->constants.find(preedge_id) == options.info->constants.end()) {
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto newshape = postshape;
         newshape.SetPadding1(0, (postshape.GetDim(0) + align_size - 1) / align_size * align_size - newshape.GetDim(0));
 
@@ -196,9 +196,9 @@ RetCode DepthwiseDirect::ModifyParam(ir::Node* node, OptKernelOptions& options) 
         }
 
         conv_param_t temp_conv_param;
-        const TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
-        const TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
-        const TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
+        const ppl::common::TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+        const ppl::common::TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
+        const ppl::common::TensorShape& shape_out = *options.tensors->find(node->GetOutput(0))->second->GetShape();
 
         ConvertToForwardConvParam(shape_in0, shape_in1, shape_out, attr_param_, temp_conv_param);
         auto stream = options.device->GetStream();

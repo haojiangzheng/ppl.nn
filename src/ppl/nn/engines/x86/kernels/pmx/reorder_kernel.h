@@ -22,7 +22,7 @@
 
 namespace ppl { namespace nn { namespace x86 {
 
-inline TensorShape PadShapeTo3Dims(const TensorShape& shape) {
+inline ppl::common::TensorShape PadShapeTo3Dims(const ppl::common::TensorShape& shape) {
     if (shape.GetDimCount() >= 3) {
         return shape;
     }
@@ -33,7 +33,7 @@ inline TensorShape PadShapeTo3Dims(const TensorShape& shape) {
         padded_dims[i] = shape.GetDim(i - offset);
     }
 
-    TensorShape padded_shape(shape);
+    ppl::common::TensorShape padded_shape(shape);
     padded_shape.Reshape(padded_dims);
     return padded_shape;
 }

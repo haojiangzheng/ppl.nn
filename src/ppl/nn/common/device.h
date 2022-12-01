@@ -20,7 +20,7 @@
 
 #include "ppl/common/retcode.h"
 #include "ppl/common/allocator.h"
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include "ppl/nn/common/buffer_desc.h"
 #include "ppl/nn/common/device_context.h"
 #include "ppl/nn/common/data_converter.h"
@@ -46,7 +46,7 @@ public:
        @param buffer the result
        @note previous memory in `buffer` would be freed.
     */
-    virtual ppl::common::RetCode Realloc(const TensorShape& shape, BufferDesc* buffer) = 0;
+    virtual ppl::common::RetCode Realloc(const ppl::common::TensorShape& shape, BufferDesc* buffer) = 0;
 
     /** @brief free `buffer` allocated by Realloc() */
     virtual void Free(BufferDesc* buffer) = 0;
@@ -63,7 +63,7 @@ public:
        @param dst points to data area on this device
        @param src points to cpu memory
     */
-    virtual ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, const TensorShape& shape) const = 0;
+    virtual ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, const ppl::common::TensorShape& shape) const = 0;
 
     /**
        @brief copy `bytes` bytes from `src` to `dst`
@@ -77,7 +77,7 @@ public:
        @param dst points to cpu memory
        @param src points to data area on this device
     */
-    virtual ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, const TensorShape& shape) const = 0;
+    virtual ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, const ppl::common::TensorShape& shape) const = 0;
 
     /**
        @brief copy `bytes` bytes from `src` to `dst`
@@ -91,7 +91,7 @@ public:
        @param dst points to data area on this device
        @param src points to data area on this device
     */
-    virtual ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, const TensorShape& shape) const = 0;
+    virtual ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, const ppl::common::TensorShape& shape) const = 0;
 
     /** @brief synchronize all operations on this device */
     virtual ppl::common::RetCode Sync() = 0;

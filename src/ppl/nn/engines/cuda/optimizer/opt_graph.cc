@@ -505,8 +505,8 @@ RetCode OptGraph::LoadConstants(CudaDevice* device) {
 
         auto preedge_id = node->GetInput(0);
         auto postedge_id = node->GetOutput(0);
-        const TensorShape& preshape = *tensor_impls_.find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *tensor_impls_.find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *tensor_impls_.find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *tensor_impls_.find(postedge_id)->second->GetShape();
 
         auto constant_ref = graph_data->constants.find(preedge_id);
         if (constant_ref != graph_data->constants.end() &&

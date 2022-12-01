@@ -23,8 +23,8 @@
 namespace ppl { namespace nn { namespace cuda {
 
 bool GemmKernel::CanDoExecute(const KernelExecContext& ctx) const {
-    const TensorShape& input = *ctx.GetInput<TensorImpl>(0)->GetShape();
-    const TensorShape& weight = *ctx.GetInput<TensorImpl>(1)->GetShape();
+    const ppl::common::TensorShape& input = *ctx.GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& weight = *ctx.GetInput<TensorImpl>(1)->GetShape();
     if (input.CalcBytesIncludingPadding() == 0) {
         return false;
     }
@@ -43,9 +43,9 @@ ppl::common::RetCode GemmKernel::DoExecute(KernelExecContext* ctx) {
     auto weight = ctx->GetInput<TensorImpl>(1);
     auto output = ctx->GetOutput<TensorImpl>(0);
 
-    const TensorShape& shape_in0 = *input->GetShape();
-    const TensorShape& shape_in1 = *weight->GetShape();
-    // const TensorShape& shape_out = *output->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *input->GetShape();
+    const ppl::common::TensorShape& shape_in1 = *weight->GetShape();
+    // const ppl::common::TensorShape& shape_out = *output->GetShape();
 
     temp_conv_param.in_num  = param_->param.transA ? shape_in0.GetDim(1) : shape_in0.GetDim(0);
     temp_conv_param.num_chl = param_->param.transB ? shape_in1.GetDim(1) : shape_in1.GetDim(0);

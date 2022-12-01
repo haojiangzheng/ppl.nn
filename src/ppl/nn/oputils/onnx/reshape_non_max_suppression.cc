@@ -29,8 +29,8 @@ RetCode ReshapeNonMaxSuppression(InputOutputInfo* info, int64_t max_output_boxes
         return RC_INVALID_VALUE;
     }
 
-    const TensorShape& input_boxes = *info->GetInput<TensorImpl>(0)->GetShape();
-    const TensorShape& input_scores = *info->GetInput<TensorImpl>(1)->GetShape();
+    const ppl::common::TensorShape& input_boxes = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& input_scores = *info->GetInput<TensorImpl>(1)->GetShape();
     auto output = info->GetOutput<TensorImpl>(0)->GetShape();
 
     if (input_boxes.GetDimCount() != 3 || input_scores.GetDimCount() != 3) {

@@ -186,7 +186,7 @@ static RetCode CreateFbShapes(FlatBufferBuilder* builder, const SerializationCon
     shape_vec.reserve(shapes.size());
 
     for (auto it = shapes.begin(); it != shapes.end(); ++it) {
-        const TensorShape& shape = it->second;
+        const ppl::common::TensorShape& shape = it->second;
 
         vector<int64_t> dims;
         for (uint32_t j = 0; j < shape.GetRealDimCount(); ++j) {

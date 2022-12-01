@@ -382,7 +382,7 @@ RetCode OptGraph::TryToInferType(ArmDevice* device) {
         options_->forward_precision == ppl::common::DATATYPE_FLOAT32) {
         for (uint32_t i = 0; i < graph_->topo->GetInputCount(); i++) {
             auto edge_id = graph_->topo->GetInput(i);
-            const TensorShape& input_shape = *tensor_impls_[edge_id]->GetShape();
+            const ppl::common::TensorShape& input_shape = *tensor_impls_[edge_id]->GetShape();
             if (input_shape.GetDataType() == ppl::common::DATATYPE_FLOAT16 ||
                 input_shape.GetDataType() == ppl::common::DATATYPE_FLOAT32) {
                 tensor_impls_[edge_id]->GetShape()->SetDataType(options_->forward_precision);

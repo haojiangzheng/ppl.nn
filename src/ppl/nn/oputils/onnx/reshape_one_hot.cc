@@ -34,7 +34,7 @@ RetCode ReshapeOneHot(InputOutputInfo* info, const ir::Attr* arg) {
 
 RetCode ReshapeOneHot(InputOutputInfo* info, const ir::Attr* arg, int64_t depth) {
     auto param = static_cast<const OneHotParam*>(arg);
-    const TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape(); // indices
+    const ppl::common::TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape(); // indices
     uint32_t real_axis = // [-r-1, r]
         param->axis >= 0 ? param->axis : param->axis + in_shape0.GetDimCount() + 1;
     std::vector<int64_t> output_dim; // add one dimension in axis

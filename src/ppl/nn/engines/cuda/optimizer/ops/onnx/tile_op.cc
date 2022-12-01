@@ -46,7 +46,7 @@ TileOp::TileOp(const ir::Node* node) : CudaOptKernel(node) {
     };
 
     infer_dims_func_ = [](InputOutputInfo* info) -> RetCode {
-        const TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
+        const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
         uint32_t dim_count = shape.GetDimCount();
         auto repeat = info->GetInput<TensorImpl>(1);
         if (repeat->GetBufferPtr<void>() == nullptr) {

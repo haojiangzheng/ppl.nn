@@ -18,11 +18,11 @@
 #ifndef _ST_HPC_PPL_NN_ENGINES_X86_UTILS_H_
 #define _ST_HPC_PPL_NN_ENGINES_X86_UTILS_H_
 
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 
 namespace ppl { namespace nn { namespace x86 {
 
-inline bool TensorShapeEqual(const TensorShape &a, const TensorShape &b) {
+inline bool TensorShapeEqual(const ppl::common::TensorShape &a, const ppl::common::TensorShape &b) {
     if (a.GetDataType() != b.GetDataType()) {
         return false;
     }

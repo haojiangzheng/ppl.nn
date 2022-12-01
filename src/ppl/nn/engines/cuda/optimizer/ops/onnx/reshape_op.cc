@@ -56,7 +56,7 @@ ReshapeOp::ReshapeOp(const ir::Node* node) : CudaOptKernel(node) {
             return RC_NOT_FOUND;
         }
 
-        const TensorShape& dst_desc = *input->GetShape();
+        const ppl::common::TensorShape& dst_desc = *input->GetShape();
         vector<int64_t> shape_data(dst_desc.CalcElementsIncludingPadding());
         auto status = input->CopyToHost(shape_data.data());
         if (status != RC_SUCCESS) {

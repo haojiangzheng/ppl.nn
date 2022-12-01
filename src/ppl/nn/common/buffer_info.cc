@@ -75,7 +75,7 @@ void BufferInfo::SetBuffer(const BufferDesc& buf, Device* device, bool is_buffer
     is_buffer_owner_ = is_buffer_owner;
 }
 
-RetCode BufferInfo::ReallocBuffer(const TensorShape& shape) {
+RetCode BufferInfo::ReallocBuffer(const ppl::common::TensorShape& shape) {
     if (!device_) {
         LOG(ERROR) << "ReallocBuffer() failed: device not set.";
         return RC_PERMISSION_DENIED;

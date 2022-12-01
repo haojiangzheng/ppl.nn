@@ -18,7 +18,7 @@
 #ifndef _ST_HPC_PPL_NN_COMMON_TENSOR_BUFFER_INFO_H_
 #define _ST_HPC_PPL_NN_COMMON_TENSOR_BUFFER_INFO_H_
 
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include "ppl/nn/common/buffer_info.h"
 
 namespace ppl { namespace nn {
@@ -70,17 +70,17 @@ public:
         return info_.GetBufferDesc();
     }
 
-    TensorShape* GetShape() const {
+    ppl::common::TensorShape* GetShape() const {
         return &shape_;
     }
 
-    void Reshape(const TensorShape& new_shape) {
+    void Reshape(const ppl::common::TensorShape& new_shape) {
         shape_ = new_shape;
     }
 
 private:
     BufferInfo info_;
-    mutable TensorShape shape_;
+    mutable ppl::common::TensorShape shape_;
 
 private:
     TensorBufferInfo(const TensorBufferInfo&) = delete;

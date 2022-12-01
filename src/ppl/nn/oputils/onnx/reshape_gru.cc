@@ -23,7 +23,7 @@ namespace ppl { namespace nn { namespace onnx {
 
 RetCode ReshapeGRU(InputOutputInfo* info, const ir::Attr* arg) {
     auto param = static_cast<const GRUParam*>(arg);
-    const TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
     const int64_t seq_len = in_shape.GetDim(0);
     const int64_t batch = in_shape.GetDim(1);
     const int64_t num_directions = param->direction == GRUParam::DIR_BIDIRECTIONAL ? 2 : 1;

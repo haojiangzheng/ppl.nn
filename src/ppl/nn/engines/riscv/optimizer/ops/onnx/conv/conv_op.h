@@ -79,7 +79,7 @@ private:
 
     template <typename T>
     ppl::kernel::riscv::conv2d_common_algo_info SelectConvAlgorithm(
-        const ppl::nn::TensorShape& input_shape, const ppl::kernel::riscv::conv2d_common_param& param,
+        const ppl::common::TensorShape& input_shape, const ppl::kernel::riscv::conv2d_common_param& param,
         const EngineOptions* engine_options) {
         if (typeid(T) == typeid(__fp16)) {
             return ppl::kernel::riscv::conv2d_fp16_algo_selector::select_algo(input_shape, param, engine_options);
@@ -92,7 +92,7 @@ private:
 
     template <typename T>
     ppl::kernel::riscv::conv2d_common_algo_info SelectBestConvAlgorithm(
-        const void* filter, ppl::nn::TensorShape& src_shape, ppl::nn::TensorShape& dst_shape,
+        const void* filter, ppl::common::TensorShape& src_shape, ppl::common::TensorShape& dst_shape,
         const ppl::kernel::riscv::conv2d_common_param& param, ppl::common::Allocator* allocator,
         const EngineOptions* engine_options) {
         if (typeid(T) == typeid(__fp16)) {

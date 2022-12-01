@@ -32,7 +32,7 @@ RetCode ReshapeResize(InputOutputInfo* info, const ir::Attr* arg, const float* r
     }
 
     auto param = static_cast<const ResizeParam*>(arg);
-    const TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
 
     uint32_t input_dim_count = in_shape.GetDimCount();
     std::vector<uint32_t> out_dims(input_dim_count);
@@ -79,7 +79,7 @@ RetCode ReshapeResize(InputOutputInfo* info, const ir::Attr* arg, const float* r
 }
 
 RetCode ReshapeResize(InputOutputInfo* info, const ir::Attr* arg) {
-    const TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
     uint32_t input_dim_count = in_shape.GetDimCount();
 
     auto roi = info->GetInputCount() > 1 ? info->GetInput<TensorImpl>(1) : nullptr;

@@ -30,8 +30,8 @@ RetCode ReshapeTile(InputOutputInfo* info, const ir::Attr*, const int64_t* repea
         return RC_INVALID_VALUE;
     }
 
-    const TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
-    const TensorShape& repeats_shape = *info->GetInput<TensorImpl>(1)->GetShape();
+    const ppl::common::TensorShape& in_shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& repeats_shape = *info->GetInput<TensorImpl>(1)->GetShape();
 
     if (in_shape.GetDimCount() != repeats_shape.GetDim(0)) {
         LOG(DEBUG) << "ERROR: input[0]'s dim count[" << in_shape.GetDimCount() << "] != input[1]'s dim[0]'s value["

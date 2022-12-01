@@ -29,8 +29,8 @@ RetCode ReshapeMatMul(InputOutputInfo* info, const ir::Attr*) {
         return RC_INVALID_VALUE;
     }
 
-    const TensorShape& lhs = *info->GetInput<TensorImpl>(0)->GetShape();
-    const TensorShape& rhs = *info->GetInput<TensorImpl>(1)->GetShape();
+    const ppl::common::TensorShape& lhs = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& rhs = *info->GetInput<TensorImpl>(1)->GetShape();
 
     MatMulBroadCaster matmul_bc;
     matmul_bc.SetInputTensorShapes(lhs, rhs);

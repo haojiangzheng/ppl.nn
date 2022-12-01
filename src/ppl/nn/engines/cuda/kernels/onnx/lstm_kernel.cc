@@ -39,7 +39,7 @@ ppl::common::RetCode LstmKernel::DoExecute(KernelExecContext* ctx) {
     auto Y_h = ctx->GetOutput<TensorImpl>(1);
     auto Y_c = ctx->GetOutput<TensorImpl>(2);
 
-    const TensorShape* X_shape = X->GetShape();
+    const ppl::common::TensorShape* X_shape = X->GetShape();
     auto hidden_size = param_->hidden_size;
     int64_t size = PPLCUDALstmGetRuntimeBufSize(X_shape, direction_, hidden_size);
     BufferDesc tmp_buffer_desc;

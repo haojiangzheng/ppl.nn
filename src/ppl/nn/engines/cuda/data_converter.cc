@@ -32,8 +32,8 @@ using namespace ppl::common;
 
 namespace ppl { namespace nn { namespace cuda {
 
-RetCode CudaDataConverter::ConvertToHost(void* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                         const TensorShape& src_desc, const void*) const {
+RetCode CudaDataConverter::ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                         const ppl::common::TensorShape& src_desc, const void*) const {
     if (src_desc.CalcBytesExcludingPadding() == 0) {
         // TODO release dst
         return RC_SUCCESS;
@@ -64,8 +64,8 @@ RetCode CudaDataConverter::ConvertToHost(void* dst, const TensorShape& dst_desc,
     return RC_SUCCESS;
 }
 
-RetCode CudaDataConverter::ConvertFromHost(BufferDesc* dst, const TensorShape& dst_desc, const void* src,
-                                           const TensorShape& src_desc, const void*) const {
+RetCode CudaDataConverter::ConvertFromHost(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const void* src,
+                                           const ppl::common::TensorShape& src_desc, const void*) const {
     if (src_desc.CalcBytesExcludingPadding() == 0) {
         device_->Free(dst);
         return RC_SUCCESS;
@@ -96,8 +96,8 @@ RetCode CudaDataConverter::ConvertFromHost(BufferDesc* dst, const TensorShape& d
     return RC_SUCCESS;
 }
 
-RetCode CudaDataConverter::Convert(BufferDesc* dst, const TensorShape& dst_desc, const BufferDesc& src,
-                                   const TensorShape& src_desc, const void*, const void*) const {
+RetCode CudaDataConverter::Convert(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const BufferDesc& src,
+                                   const ppl::common::TensorShape& src_desc, const void*, const void*) const {
     if (src_desc.CalcBytesExcludingPadding() == 0) {
         device_->Free(dst);
         return RC_SUCCESS;
@@ -142,8 +142,8 @@ RetCode CudaDataConverter::Convert(BufferDesc* dst, const TensorShape& dst_desc,
     return RC_SUCCESS;
 }
 
-RetCode CudaDataConverter::ConvertToHost(void* dst, const TensorShape& dst_desc, const CudaTensorQuant& dst_quant,
-                                         const BufferDesc& src, const TensorShape& src_desc,
+RetCode CudaDataConverter::ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc, const CudaTensorQuant& dst_quant,
+                                         const BufferDesc& src, const ppl::common::TensorShape& src_desc,
                                          const CudaTensorQuant& src_quant) const {
     if (src_desc.CalcBytesExcludingPadding() == 0) {
         // TODO release dst
@@ -175,9 +175,9 @@ RetCode CudaDataConverter::ConvertToHost(void* dst, const TensorShape& dst_desc,
     return RC_SUCCESS;
 }
 
-RetCode CudaDataConverter::ConvertFromHost(BufferDesc* dst, const TensorShape& dst_desc,
+RetCode CudaDataConverter::ConvertFromHost(BufferDesc* dst, const ppl::common::TensorShape& dst_desc,
                                            const CudaTensorQuant& dst_quant, const void* src,
-                                           const TensorShape& src_desc, const CudaTensorQuant& src_quant) const {
+                                           const ppl::common::TensorShape& src_desc, const CudaTensorQuant& src_quant) const {
     if (src_desc.CalcBytesExcludingPadding() == 0) {
         device_->Free(dst);
         return RC_SUCCESS;
@@ -208,8 +208,8 @@ RetCode CudaDataConverter::ConvertFromHost(BufferDesc* dst, const TensorShape& d
     return RC_SUCCESS;
 }
 
-RetCode CudaDataConverter::Convert(BufferDesc* dst, const TensorShape& dst_desc, const CudaTensorQuant& dst_quant,
-                                   const BufferDesc& src, const TensorShape& src_desc,
+RetCode CudaDataConverter::Convert(BufferDesc* dst, const ppl::common::TensorShape& dst_desc, const CudaTensorQuant& dst_quant,
+                                   const BufferDesc& src, const ppl::common::TensorShape& src_desc,
                                    const CudaTensorQuant& src_quant) const {
     if (src_desc.CalcBytesExcludingPadding() == 0) {
         device_->Free(dst);

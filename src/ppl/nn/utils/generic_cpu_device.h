@@ -29,16 +29,16 @@ public:
     GenericCpuDevice(uint64_t alignment = 64) : allocator_(alignment) {}
 
     ppl::common::RetCode Realloc(uint64_t bytes, BufferDesc*) override;
-    ppl::common::RetCode Realloc(const TensorShape&, BufferDesc*) override final;
+    ppl::common::RetCode Realloc(const ppl::common::TensorShape&, BufferDesc*) override final;
     void Free(BufferDesc*) override;
 
     ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, uint64_t bytes) const override;
-    ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, const TensorShape&) const override;
+    ppl::common::RetCode CopyFromHost(BufferDesc* dst, const void* src, const ppl::common::TensorShape&) const override;
     ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, uint64_t bytes) const override;
-    ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, const TensorShape&) const override;
+    ppl::common::RetCode CopyToHost(void* dst, const BufferDesc& src, const ppl::common::TensorShape&) const override;
 
     ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, uint64_t bytes) const override;
-    ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, const TensorShape&) const override;
+    ppl::common::RetCode Copy(BufferDesc* dst, const BufferDesc& src, const ppl::common::TensorShape&) const override;
 
     ppl::common::RetCode Sync() override {
         return ppl::common::RC_SUCCESS;

@@ -28,7 +28,7 @@
 namespace ppl { namespace nn { namespace utils {
 
 /** @brief copy buffer to tensor */
-ppl::common::RetCode CopyBuffer(const BufferDesc& src_buf, const TensorShape& src_shape, const Device* src_device,
+ppl::common::RetCode CopyBuffer(const BufferDesc& src_buf, const ppl::common::TensorShape& src_shape, const Device* src_device,
                                 TensorImpl* dst, Device* tmp_cpu_device = nullptr);
 
 /** @brief copy one tensor to another */
@@ -42,13 +42,13 @@ ppl::common::RetCode LoadConstants(const ir::Graph&, Device*, std::map<edgeid_t,
 
 ppl::common::RetCode LoadConstants(const ConstantVisitor&, Device*, std::map<edgeid_t, BufferInfo>*);
 
-ppl::common::RetCode GenericLoadConstant(const void* data, uint64_t size, const TensorShape& shape, Device* device,
+ppl::common::RetCode GenericLoadConstant(const void* data, uint64_t size, const ppl::common::TensorShape& shape, Device* device,
                                          RuntimeConstantInfo* info, bool omit_data = false);
 
-ppl::common::RetCode GenericLoadConstant(const void* data, uint64_t size, const TensorShape& shape, Device* device,
+ppl::common::RetCode GenericLoadConstant(const void* data, uint64_t size, const ppl::common::TensorShape& shape, Device* device,
                                          BufferInfo* info);
 
-void IrShape2TensorShape(const ir::Shape&, TensorShape*);
+void IrShape2TensorShape(const ir::Shape&, ppl::common::TensorShape*);
 
 }}} // namespace ppl::nn::utils
 

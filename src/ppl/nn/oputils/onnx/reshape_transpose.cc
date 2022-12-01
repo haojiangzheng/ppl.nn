@@ -24,7 +24,7 @@ namespace ppl { namespace nn { namespace onnx {
 
 RetCode ReshapeTranspose(InputOutputInfo* info, const ir::Attr* arg) {
     auto param = static_cast<const TransposeParam*>(arg);
-    const TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
 
     auto modified_perm = param->perm;
     if (modified_perm.empty()) { // perm is empty, default is reverse dimention.

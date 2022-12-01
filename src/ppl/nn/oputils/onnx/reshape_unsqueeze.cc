@@ -27,7 +27,7 @@ RetCode ReshapeUnsqueeze(InputOutputInfo* info, const ir::Attr* arg) {
     auto param = static_cast<const UnsqueezeParam*>(arg);
     std::vector<int32_t> axes(param->axes.size());
 
-    const TensorShape& input = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& input = *info->GetInput<TensorImpl>(0)->GetShape();
     const int32_t out_dim_count = (int32_t)input.GetRealDimCount() + param->axes.size();
 
     for (uint32_t i = 0; i < param->axes.size(); ++i) {
