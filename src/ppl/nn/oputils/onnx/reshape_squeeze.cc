@@ -32,7 +32,7 @@ RetCode ReshapeSqueeze(InputOutputInfo* info, const ir::Attr* arg) {
         return RC_INVALID_VALUE;
     }
 
-    const TensorShape& input = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& input = *info->GetInput<TensorImpl>(0)->GetShape();
     auto output = info->GetOutput<TensorImpl>(0)->GetShape();
 
     if (input.IsScalar()) {

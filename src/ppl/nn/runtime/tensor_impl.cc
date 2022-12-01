@@ -47,13 +47,13 @@ RetCode TensorImpl::CopyFromHost(const void* src) {
     return buffer_info_.GetDevice()->CopyFromHost(&buffer_info_.GetBufferDesc(), src, *buffer_info_.GetShape());
 }
 
-RetCode TensorImpl::ConvertToHost(void* dst, const TensorShape& dst_desc) const {
+RetCode TensorImpl::ConvertToHost(void* dst, const ppl::common::TensorShape& dst_desc) const {
     auto converter = buffer_info_.GetDevice()->GetDataConverter();
     return converter->ConvertToHost(dst, dst_desc, buffer_info_.GetBufferDesc(), *buffer_info_.GetShape(),
                                     custom_info_);
 }
 
-RetCode TensorImpl::ConvertFromHost(const void* src, const TensorShape& src_desc) {
+RetCode TensorImpl::ConvertFromHost(const void* src, const ppl::common::TensorShape& src_desc) {
     auto rc = ReallocBuffer();
     if (rc != RC_SUCCESS) {
         return rc;

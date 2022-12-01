@@ -51,7 +51,7 @@ SliceOp::SliceOp(const ir::Node* node) : CudaOptKernel(node) {
     infer_dims_func_ = [](InputOutputInfo* info) -> RetCode {
         SliceKernelParam kernel_param;
 
-        const TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
+        const ppl::common::TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
         int dim_count = in_shape0.GetDimCount();
         int input_count = info->GetInputCount();
         { // starts

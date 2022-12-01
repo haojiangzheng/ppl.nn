@@ -46,7 +46,7 @@ bool ConvTransposeAlgorithm::IsSupported(const ir::Node* node, const OptKernelOp
                                     dataformat_t input_format) const {
     uint32_t group = (reinterpret_cast<CudaConvTransposeParam*>(options.param))->param.group;
     if (group != 1) return false;
-    const TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& tensor0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
     if (tensor0.GetDataType() != ppl::common::DATATYPE_FLOAT16) {
         return false;
     }
@@ -149,8 +149,8 @@ RetCode ConvTransposeAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& op
     auto weight_edge = topo->GetEdge(node->GetInput(1));
     auto weight_node = topo->GetNode(weight_edge->GetProducer());
 
-    const TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
-    const TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
+    const ppl::common::TensorShape& shape_in0 = *options.tensors->find(node->GetInput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape_in1 = *options.tensors->find(node->GetInput(1))->second->GetShape();
     auto align_size = ppl::common::cuda::GetDataFormatChannelAlignment(shape_in0.GetDataFormat());
 
     RetCode status;
@@ -160,8 +160,8 @@ RetCode ConvTransposeAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& op
         options.info->constants.find(weight_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = weight_node->GetInput(0);
         auto postedge_id = node->GetInput(1);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        // const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        // const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         TensorShape postshape = *options.tensors->find(postedge_id)->second->GetShape();
         postshape.SetDataFormat(ppl::common::DATAFORMAT_NDARRAY);
         auto newshape = postshape;
@@ -223,8 +223,8 @@ RetCode ConvTransposeAlgorithm::ModifyParam(ir::Node* node, OptKernelOptions& op
         options.info->constants.find(bias_node->GetInput(0)) == options.info->constants.end()) {
         auto preedge_id = bias_node->GetInput(0);
         auto postedge_id = node->GetInput(2);
-        const TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
-        const TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
+        const ppl::common::TensorShape& preshape = *options.tensors->find(preedge_id)->second->GetShape();
+        const ppl::common::TensorShape& postshape = *options.tensors->find(postedge_id)->second->GetShape();
         auto newshape = postshape;
         int out_c_pad = (newshape.GetDim(0) + align_size - 1) / align_size * align_size;
         newshape.SetDim(0, out_c_pad);

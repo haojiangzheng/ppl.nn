@@ -53,8 +53,8 @@ ppl::common::RetCode AvePoolingKernel::DoExecute(KernelExecContext* ctx) {
             output->TransferBufferFrom(input);
             return ppl::common::RC_SUCCESS;
         }
-        TensorShape in_shape(*input->GetShape());
-        TensorShape out_shape(*output->GetShape());
+        ppl::common::TensorShape in_shape(*input->GetShape());
+        ppl::common::TensorShape out_shape(*output->GetShape());
         // 3d pooling not supported now, try to convert to 2d ones, if can not, return "unsupported"
         if (kernel_dims == 3) {
             int32_t pad_3 = param_->pads.size() >= 3 ? param_->pads[2] : 0;

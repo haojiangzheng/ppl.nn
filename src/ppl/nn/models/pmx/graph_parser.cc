@@ -159,7 +159,7 @@ public:
     }
 
     RetCode ForEach(
-        const function<RetCode(const ir::Edge*, const void*, uint64_t, const TensorShape&)>& f) const override {
+        const function<RetCode(const ir::Edge*, const void*, uint64_t, const ppl::common::TensorShape&)>& f) const override {
         for (auto y = fb_constants_->begin(); y != fb_constants_->end(); ++y) {
             auto fb_constant = *y;
             auto edge = topo_->GetEdge(fb_constant->edge_id());

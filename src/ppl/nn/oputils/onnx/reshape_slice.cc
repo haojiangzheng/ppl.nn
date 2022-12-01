@@ -27,7 +27,7 @@ namespace ppl { namespace nn { namespace onnx {
 
 RetCode ReshapeSlice(InputOutputInfo* info, const int64_t* starts, const int64_t* ends, const int64_t* axes,
                      const int64_t* steps, const int64_t axes_num) {
-    const TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
+    const ppl::common::TensorShape& shape = *info->GetInput<TensorImpl>(0)->GetShape();
     int dim_count = shape.GetDimCount();
 
     vector<int64_t> output_dim(dim_count);

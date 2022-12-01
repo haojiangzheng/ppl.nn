@@ -110,7 +110,7 @@ RetCode AlgoGraph::UpdateNode(ir::Node* node, OptKernelOptions& options) {
 
         ir::Node* pre_node = FindBackwardNode(node, i);
         if (pre_node == nullptr) { // this is an input node
-            const TensorShape& shape = *options.tensors->find(edge_id)->second->GetShape();
+            const ppl::common::TensorShape& shape = *options.tensors->find(edge_id)->second->GetShape();
             for (auto it = temp_vect.begin(); it != temp_vect.end(); ++it) {
                 if (shape.GetDataFormat() == (*it)->input_format) {
                     (*it)->shortest_time[i] = 0.0;

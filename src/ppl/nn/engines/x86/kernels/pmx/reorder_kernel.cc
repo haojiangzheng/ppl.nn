@@ -42,7 +42,7 @@ ppl::common::RetCode ReorderKernel::DoExecute(KernelExecContext* ctx) {
 
     if (ppl::common::GetSizeOfDataType(data_type) == 4) {
         if (input_format == ppl::common::DATAFORMAT_NDARRAY && output_format == ppl::common::DATAFORMAT_N16CX) {
-            const TensorShape padded_input_shape = PadShapeTo3Dims(*input->GetShape());
+            const ppl::common::TensorShape padded_input_shape = PadShapeTo3Dims(*input->GetShape());
             if (may_inplace && ppl::kernel::x86::reorder_ndarray_n16cx_may_inplace(&padded_input_shape)) {
                 output->TransferBufferFrom(input);
                 PPLNN_X86_DEBUG_TRACE("Output [output]:\n");
@@ -99,7 +99,7 @@ ppl::common::RetCode ReorderKernel::DoExecute(KernelExecContext* ctx) {
         PPLNN_X86_DEBUG_TRACE("Output [output]:\n");
         PPL_X86_TENSOR_PRINT_DEBUG_MSG(output);
         if (input_format == ppl::common::DATAFORMAT_NDARRAY && output_format == ppl::common::DATAFORMAT_N16CX) {
-            const TensorShape padded_input_shape = PadShapeTo3Dims(*input->GetShape());
+            const ppl::common::TensorShape padded_input_shape = PadShapeTo3Dims(*input->GetShape());
             if (MayUseISA(ppl::common::ISA_X86_AVX)) {
                 return ppl::kernel::x86::reorder_ndarray_n16cx_int64_avx(
                     &padded_input_shape, input->GetBufferPtr<int64_t>(), output->GetBufferPtr<int64_t>());

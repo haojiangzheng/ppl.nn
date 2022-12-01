@@ -41,7 +41,7 @@ RetCode GenericCpuDevice::Realloc(uint64_t bytes, BufferDesc* buffer) {
     return RC_SUCCESS;
 }
 
-RetCode GenericCpuDevice::Realloc(const TensorShape& shape, BufferDesc* buffer) {
+RetCode GenericCpuDevice::Realloc(const ppl::common::TensorShape& shape, BufferDesc* buffer) {
     return Realloc(shape.CalcBytesIncludingPadding(), buffer);
 }
 
@@ -57,7 +57,7 @@ RetCode GenericCpuDevice::CopyFromHost(BufferDesc* dst, const void* src, uint64_
     return RC_SUCCESS;
 }
 
-RetCode GenericCpuDevice::CopyFromHost(BufferDesc* dst, const void* src, const TensorShape& shape) const {
+RetCode GenericCpuDevice::CopyFromHost(BufferDesc* dst, const void* src, const ppl::common::TensorShape& shape) const {
     return CopyFromHost(dst, src, shape.CalcBytesIncludingPadding());
 }
 
@@ -66,7 +66,7 @@ RetCode GenericCpuDevice::CopyToHost(void* dst, const BufferDesc& src, uint64_t 
     return RC_SUCCESS;
 }
 
-RetCode GenericCpuDevice::CopyToHost(void* dst, const BufferDesc& src, const TensorShape& shape) const {
+RetCode GenericCpuDevice::CopyToHost(void* dst, const BufferDesc& src, const ppl::common::TensorShape& shape) const {
     return CopyToHost(dst, src, shape.CalcBytesIncludingPadding());
 }
 
@@ -75,7 +75,7 @@ RetCode GenericCpuDevice::Copy(BufferDesc* dst, const BufferDesc& src, uint64_t 
     return RC_SUCCESS;
 }
 
-RetCode GenericCpuDevice::Copy(BufferDesc* dst, const BufferDesc& src, const TensorShape& shape) const {
+RetCode GenericCpuDevice::Copy(BufferDesc* dst, const BufferDesc& src, const ppl::common::TensorShape& shape) const {
     return Copy(dst, src, shape.CalcBytesIncludingPadding());
 }
 

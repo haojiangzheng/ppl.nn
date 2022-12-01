@@ -32,7 +32,7 @@ void IrShape2TensorShape(const ir::Shape& ir_shape, TensorShape* tensor_shape) {
 
 /* -------------------------------------------------------------------------- */
 
-RetCode CopyBuffer(const BufferDesc& src_buf, const TensorShape& src_shape, const Device* src_dev, TensorImpl* dst,
+RetCode CopyBuffer(const BufferDesc& src_buf, const ppl::common::TensorShape& src_shape, const Device* src_dev, TensorImpl* dst,
                    Device* tmp_cpu_device) {
     RetCode status;
     auto dst_dev = dst->GetDevice();
@@ -85,7 +85,7 @@ RetCode CopyBuffer(const BufferDesc& src_buf, const TensorShape& src_shape, cons
 
 /* -------------------------------------------------------------------------- */
 
-RetCode GenericLoadConstant(const void* data, uint64_t size, const TensorShape& shape, Device* device,
+RetCode GenericLoadConstant(const void* data, uint64_t size, const ppl::common::TensorShape& shape, Device* device,
                             RuntimeConstantInfo* info, bool omit_data) {
     info->Reshape(shape);
 
@@ -107,7 +107,7 @@ RetCode GenericLoadConstant(const void* data, uint64_t size, const TensorShape& 
     return RC_SUCCESS;
 }
 
-RetCode GenericLoadConstant(const void* data, uint64_t size, const TensorShape& shape, Device* device,
+RetCode GenericLoadConstant(const void* data, uint64_t size, const ppl::common::TensorShape& shape, Device* device,
                             BufferInfo* info) {
     info->SetDevice(device);
     auto status = info->ReallocBuffer(shape);
@@ -177,7 +177,7 @@ RetCode LoadConstants(const ir::Graph& graph, Device* device, map<edgeid_t, Runt
 
 RetCode LoadConstants(const ConstantVisitor& visitor, Device* dev, map<edgeid_t, BufferInfo>* eid2info) {
     return visitor.ForEach(
-        [eid2info, dev](const ir::Edge* edge, const void* data, uint64_t size, const TensorShape& shape) -> RetCode {
+        [eid2info, dev](const ir::Edge* edge, const void* data, uint64_t size, const ppl::common::TensorShape& shape) -> RetCode {
             BufferInfo info;
             auto status = utils::GenericLoadConstant(data, size, shape, dev, &info);
             if (status != RC_SUCCESS) {

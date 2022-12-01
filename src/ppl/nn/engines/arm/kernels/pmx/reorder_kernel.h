@@ -22,7 +22,7 @@
 
 namespace ppl { namespace nn { namespace arm {
 
-inline TensorShape PadShapeTo3Dims(const TensorShape& shape) {
+inline TensorShape PadShapeTo3Dims(const ppl::common::TensorShape& shape) {
     if (shape.GetDimCount() >= 3) {
         return shape;
     }

@@ -19,7 +19,7 @@
 #define _ST_HPC_PPL_NN_COMMON_CONSTANT_VISITOR_H_
 
 #include "ppl/nn/ir/edge.h"
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include <functional>
 
 namespace ppl { namespace nn {
@@ -29,7 +29,7 @@ public:
     virtual ~ConstantVisitor() {}
     virtual ppl::common::RetCode ForEach(const std::function<ppl::common::RetCode(const void*, uint64_t)>&) const = 0;
     virtual ppl::common::RetCode ForEach(const std::function<ppl::common::RetCode(const ir::Edge*, const void*, uint64_t,
-                                                                                  const TensorShape&)>&) const = 0;
+                                                                                  const ppl::common::TensorShape&)>&) const = 0;
 };
 
 }} // namespace ppl::nn

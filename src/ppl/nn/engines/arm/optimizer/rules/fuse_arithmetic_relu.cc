@@ -58,7 +58,7 @@ bool FuseArithmeticReLURule::Apply(const OptKernelOptions& options) {
                 IsGraphOutput(graph_topo, arithmetic_output_edge->GetId())) {
                 continue;
             }
-            const TensorShape& arithmetic_output_edge_shape = *tensors[arithmetic_output_edge->GetId()]->GetShape();
+            const ppl::common::TensorShape& arithmetic_output_edge_shape = *tensors[arithmetic_output_edge->GetId()]->GetShape();
 
             // Only Support FP16 & FP32
             if (arithmetic_output_edge_shape.GetDataType() != ppl::common::DATATYPE_FLOAT32 &&

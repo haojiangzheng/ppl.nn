@@ -18,7 +18,7 @@
 #ifndef _ST_HPC_PPL_NN_RUNTIME_RUNTIME_GRAPH_INFO_H_
 #define _ST_HPC_PPL_NN_RUNTIME_RUNTIME_GRAPH_INFO_H_
 
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include "ppl/nn/common/buffer_info.h"
 #include "ppl/nn/runtime/opt_kernel.h"
 #include <vector>
@@ -47,7 +47,7 @@ struct RuntimeGraphInfo final {
         partitions.clear();
     }
 
-    std::map<edgeid_t, TensorShape> shapes;
+    std::map<edgeid_t, ppl::common::TensorShape> shapes;
     std::vector<Partition> partitions;
 };
 

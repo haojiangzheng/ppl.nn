@@ -22,7 +22,7 @@ using namespace ppl::common;
 namespace ppl { namespace nn { namespace cuda {
 
 double ConcatAlgorithm::ExcuteTimer(const ir::Node* node, OptKernelOptions& options) {
-    const TensorShape& shape = *options.tensors->find(node->GetOutput(0))->second->GetShape();
+    const ppl::common::TensorShape& shape = *options.tensors->find(node->GetOutput(0))->second->GetShape();
     double timer = 1.0e-7 * shape.CalcElementsIncludingPadding();
     return timer;
 }

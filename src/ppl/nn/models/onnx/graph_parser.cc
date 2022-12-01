@@ -16,7 +16,7 @@
 // under the License.
 
 #include "ppl/common/str_utils.h"
-#include "ppl/nn/common/tensor_shape.h"
+#include "ppl/common/tensor_shape.h"
 #include "ppl/nn/models/onnx/graph_parser.h"
 #include "ppl/nn/models/onnx/param_parser_manager.h"
 #include "ppl/nn/models/onnx/utils.h"

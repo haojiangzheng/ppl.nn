@@ -101,7 +101,7 @@ ppl::common::RetCode MinKernel::DoExecute(KernelExecContext* ctx) {
         }
     } else {
         if (MayUseISA(ppl::common::ISA_X86_AVX)) {
-            std::vector<const TensorShape*> input_shapes(ctx->GetInputCount());
+            std::vector<const ppl::common::TensorShape*> input_shapes(ctx->GetInputCount());
             for (uint32_t i = 0; i < ctx->GetInputCount(); ++i) {
                 input_shapes[i] = ctx->GetInput<TensorImpl>(i)->GetShape();
             }
@@ -109,7 +109,7 @@ ppl::common::RetCode MinKernel::DoExecute(KernelExecContext* ctx) {
             kernel::x86::min_ndarray_fp32_avx(input_shapes.data(), min->GetShape(), input_ptrs, input_num, temp,
                                               min->GetBufferPtr<float>());
         } else if (MayUseISA(ppl::common::ISA_X86_SSE)) {
-            std::vector<const TensorShape*> input_shapes(ctx->GetInputCount());
+            std::vector<const ppl::common::TensorShape*> input_shapes(ctx->GetInputCount());
             for (uint32_t i = 0; i < ctx->GetInputCount(); ++i) {
                 input_shapes[i] = ctx->GetInput<TensorImpl>(i)->GetShape();
             }

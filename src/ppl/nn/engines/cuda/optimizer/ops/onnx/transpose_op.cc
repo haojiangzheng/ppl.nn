@@ -57,7 +57,7 @@ TransposeOp::TransposeOp(const ir::Node* node) : CudaOptKernel(node) {
     };
 
     infer_dims_func_ = [this](InputOutputInfo* info) -> RetCode {
-        const TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
+        const ppl::common::TensorShape& in_shape0 = *info->GetInput<TensorImpl>(0)->GetShape();
 
         TransposeParam modified_param = param_;
         if (modified_param.perm.empty()) {

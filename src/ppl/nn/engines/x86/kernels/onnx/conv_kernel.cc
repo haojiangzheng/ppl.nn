@@ -52,7 +52,7 @@ ppl::common::RetCode ConvKernel::DoExecute(KernelExecContext* ctx) {
 
     const float* b_data = nullptr;
     const float* sum_src_data = nullptr;
-    const TensorShape* sum_src_shape = nullptr;
+    const ppl::common::TensorShape* sum_src_shape = nullptr;
 
     PPLNN_X86_DEBUG_TRACE("Op: %s\n", GetName().c_str());
 

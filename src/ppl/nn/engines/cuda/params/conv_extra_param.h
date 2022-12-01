@@ -51,8 +51,8 @@ struct CudaConvParam final {
     ConvExtraParam extra_param;
 };
 
-ppl::common::RetCode ConvertToForwardConvParam(const TensorShape& shape_in0, const TensorShape& shape_in1,
-                                               const TensorShape& shape_out, const CudaConvParam& cuda_param,
+ppl::common::RetCode ConvertToForwardConvParam(const ppl::common::TensorShape& shape_in0, const ppl::common::TensorShape& shape_in1,
+                                               const ppl::common::TensorShape& shape_out, const CudaConvParam& cuda_param,
                                                conv_param_t& conv_param);
 
 ppl::common::RetCode ConvertToForwardFuseParam(InputOutputInfo* info, CudaDevice* devive,
