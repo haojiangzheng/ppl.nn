@@ -25,7 +25,7 @@
 namespace ppl { namespace nn { namespace pmx {
 
 struct DeserializationContext final {
-    const std::map<edgeid_t, TensorShape>* shapes;
+    const std::map<edgeid_t, ppl::common::TensorShape>* shapes;
     const std::map<edgeid_t, BufferInfo>* constants;
 };
 
