@@ -245,3 +245,22 @@ else()
 endif()
 
 unset(__GOOGLETEST_TAG__)
+
+set(__PPLX86KERNEL_COMMIT__ 3e8de6bfab6ff0f8077911e61fd086799e017933)
+
+if(PPLNN_USE_X86_64)
+    if(PPLNN_DEP_PPLX86KERNEL_PKG)
+        hpcc_declare_pkg_dep(ppl.x86.kernel
+        ${PPLNN_DEP_PPLX86KERNEL_PKG})
+    else()
+        if(NOT PPLNN_DEP_PPLX86KERNEL_GIT)
+            set(PPLNN_DEP_PPLX86KERNEL_GIT "https://github.com/haojiangzheng/ppl.kernel.x86.git")
+        endif()
+        hpcc_declare_git_dep(ppl.x86.kernel
+            ${PPLNN_DEP_PPLX86KERNEL_GIT}
+            ${__PPLX86KERNEL_COMMIT__})
+    endif()
+endif()
+
+unset(__PPLX86KERNEL_COMMIT__)
+
